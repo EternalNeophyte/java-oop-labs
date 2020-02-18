@@ -18,4 +18,15 @@ public class Person {
     public String getSecondName() {
         return secondName;
     }
+
+    public static Person getUnknownPerson() {
+        return UNKNOWN_PERSON;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("\nPerson info: ");
+        builder.append("first name - ").append(firstName).append(", second name - ").append(secondName);
+        return builder.toString();
+    }
 }
