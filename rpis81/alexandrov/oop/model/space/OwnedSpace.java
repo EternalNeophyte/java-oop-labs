@@ -1,42 +1,46 @@
-package rpis81.alexandrov.oop.model;
+package rpis81.alexandrov.oop.model.space;
 
-public class Space {
+import rpis81.alexandrov.oop.model.Person;
+import rpis81.alexandrov.oop.model.Vehicle;
+
+public class OwnedSpace implements Space {
 
     private Vehicle vehicle;
     private Person person;
 
-    public Space(Vehicle vehicle, Person person) {
+    public OwnedSpace(Vehicle vehicle, Person person) {
         this.vehicle = vehicle;
         this.person = person;
     }
 
-    public Space() {
-        this(new Vehicle(), Person.getUnknownPerson());
-    }
-
+    @Override
     public Vehicle getVehicle() {
         return vehicle;
     }
 
+    @Override
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
 
+    @Override
     public Person getPerson() {
         return person;
     }
 
+    @Override
     public void setPerson(Person person) {
         this.person = person;
     }
 
+    @Override
     public boolean isEmpty() {
         return vehicle == null || vehicle.getRegistrationNumber().isEmpty();
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder("\n# Space #");
+        StringBuilder builder = new StringBuilder("# Space #\n");
         builder.append(vehicle.toString()).append(person.toString());
         return builder.toString();
     }

@@ -25,8 +25,8 @@ public class Person {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder("\nPerson info: ");
-        builder.append("first name - ").append(firstName).append(", second name - ").append(secondName);
+        StringBuilder builder = new StringBuilder("Person info: ");
+        builder.append("first name - ").append(firstName).append(", second name - ").append(secondName).append("\n");
         return builder.toString();
     }
 }
