@@ -1,10 +1,11 @@
 package rpis81.alexandrov.oop.model;
 
 import rpis81.alexandrov.oop.model.floor.Floor;
-import rpis81.alexandrov.oop.model.floor.OwnersFloor;
 import rpis81.alexandrov.oop.model.instance.InstanceHandler;
 import rpis81.alexandrov.oop.model.space.RentedSpace;
 import rpis81.alexandrov.oop.model.space.Space;
+import rpis81.alexandrov.oop.model.vehicle.Vehicle;
+import rpis81.alexandrov.oop.model.vehicle.VehicleTypes;
 
 public class Parking implements InstanceHandler {
 
@@ -26,8 +27,8 @@ public class Parking implements InstanceHandler {
         return size;
     }
 
-    public OwnersFloor[] getFloors() {
-        OwnersFloor[] notNullFloors = new OwnersFloor[size];
+    public Floor[] getFloors() {
+        Floor[] notNullFloors = new Floor[size];
         System.arraycopy(floors, 0, notNullFloors, 0, size);
         return notNullFloors;
     }
@@ -67,7 +68,7 @@ public class Parking implements InstanceHandler {
         return totalCount;
     }
 
-    public boolean add(OwnersFloor floor) {
+    public boolean add(Floor floor) {
         expand();
         for(int i = 0; i < floors.length; i++) {
             if(floors[i] == null) {
@@ -79,7 +80,7 @@ public class Parking implements InstanceHandler {
         return false;
     }
 
-    public boolean add(int index, OwnersFloor floor) {
+    public boolean add(int index, Floor floor) {
         shift(index, false);
         return add(floor);
     }
@@ -88,7 +89,7 @@ public class Parking implements InstanceHandler {
         return floors[index];
     }
 
-    public Floor replaceFloor(int index, OwnersFloor floor) {
+    public Floor replaceFloor(int index, Floor floor) {
         Floor replacedFloor = floors[index];
         floors[index] = floor;
         return replacedFloor;
@@ -123,17 +124,29 @@ public class Parking implements InstanceHandler {
         return new RentedSpace();
     }
 
-    public Space replaceSpace(RentedSpace rentedSpace, String registrationNumber) {
+    public Space replaceSpace(Space space, String registrationNumber) {
         Space replacedSpace = new RentedSpace();
         for(int i = 0; i < getFloors().length; i++) {
             for(int j = 0; j < getFloors()[i].getSpaces().length; j++) {
                 if(floors[i].checkRegistrationNumber(floors[i].getSpace(j), registrationNumber)) {
                     replacedSpace = floors[i].getSpace(j);
-                    floors[i].getSpaces()[j] = rentedSpace;
+                    floors[i].getSpaces()[j] = space;
                 }
             }
         }
         return replacedSpace;
+    }
+
+    public int getFreeSpacesCount() {
+        return getSpacesCountByVehiclesType(VehicleTypes.NONE);
+    }
+
+    public int getSpacesCountByVehiclesType(VehicleTypes type) {
+        int count = 0;
+        for(Floor floor : getFloors()) {
+            count += floor.getSpacesCountByVehiclesType(type);
+        }
+        return count;
     }
 
     @Override
@@ -163,7 +176,7 @@ public class Parking implements InstanceHandler {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder("\n= Parking =");
-        for(OwnersFloor floor : getFloors()) {
+        for(Floor floor : getFloors()) {
             builder.append(floor.toString());
         }
         return builder.toString();

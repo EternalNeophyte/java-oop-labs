@@ -1,7 +1,8 @@
 package rpis81.alexandrov.oop.model.floor;
 
 import rpis81.alexandrov.oop.model.space.Space;
-import rpis81.alexandrov.oop.model.Vehicle;
+import rpis81.alexandrov.oop.model.vehicle.Vehicle;
+import rpis81.alexandrov.oop.model.vehicle.VehicleTypes;
 
 public interface Floor {
 
@@ -17,4 +18,8 @@ public interface Floor {
     Space[] getSpaces();
     Vehicle[] getVehicles();
     boolean checkRegistrationNumber(Space space, String registrationNumber);
+    boolean checkVehiclesType(Space space, VehicleTypes types);
+    Space[] getSpacesByVehiclesType(VehicleTypes type);
+    Space[] getFreeSpaces();
+    int getSpacesCountByVehiclesType(VehicleTypes type);
 }

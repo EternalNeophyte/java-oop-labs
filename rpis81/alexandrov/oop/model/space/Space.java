@@ -1,7 +1,7 @@
 package rpis81.alexandrov.oop.model.space;
 
 import rpis81.alexandrov.oop.model.Person;
-import rpis81.alexandrov.oop.model.Vehicle;
+import rpis81.alexandrov.oop.model.vehicle.Vehicle;
 
 public interface Space {
 

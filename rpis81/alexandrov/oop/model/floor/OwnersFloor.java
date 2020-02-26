@@ -3,7 +3,10 @@ package rpis81.alexandrov.oop.model.floor;
 import rpis81.alexandrov.oop.model.instance.InstanceHandler;
 import rpis81.alexandrov.oop.model.space.RentedSpace;
 import rpis81.alexandrov.oop.model.space.Space;
-import rpis81.alexandrov.oop.model.Vehicle;
+import rpis81.alexandrov.oop.model.vehicle.Vehicle;
+import rpis81.alexandrov.oop.model.vehicle.VehicleTypes;
+
+import java.util.Arrays;
 
 public class OwnersFloor implements Floor, InstanceHandler {
 
@@ -78,6 +81,11 @@ public class OwnersFloor implements Floor, InstanceHandler {
     }
 
     @Override
+    public boolean checkVehiclesType(Space space, VehicleTypes type) {
+        return space.getVehicle().getType().equals(type);
+    }
+
+    @Override
     public Space replaceWith(int index, Space space) {
         Space replacedRentedSpace = spaces[index];
         spaces[index] = space;
@@ -125,6 +133,22 @@ public class OwnersFloor implements Floor, InstanceHandler {
     }
 
     @Override
+    public Space[] getSpacesByVehiclesType(VehicleTypes type) {
+        return Arrays.stream(getSpaces())
+                .filter(space -> checkVehiclesType(space, type))
+                .toArray(Space[]::new);
+    }
+
+    @Override
+    public Space[] getFreeSpaces() {
+        return getSpacesByVehiclesType(VehicleTypes.NONE);
+    }
+
+    public int getSpacesCountByVehiclesType(VehicleTypes type) {
+        return getSpacesByVehiclesType(type).length;
+    }
+
+    @Override
     public void shift(int index, boolean isLeft) {
         expand();
         if (spaces.length >= index) {
@@ -148,13 +172,21 @@ public class OwnersFloor implements Floor, InstanceHandler {
         }
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder("\n\nFloor with size ");
-        builder.append(size);
-        for (Space space : getSpaces()) {
-            builder.append(space.toString());
+    public void printSpaces() {
+        for(Space space : getSpaces()) {
+            System.out.println(space.toString());
         }
-        return builder.toString();
+    }
+
+    public void printVehicles() {
+        for(Vehicle vehicle : getVehicles()) {
+            System.out.println(vehicle.toString());
+        }
+    }
+
+    public void printSpacesByVehiclesType(VehicleTypes type) {
+        for(Space space : getSpacesByVehiclesType(type)) {
+            System.out.println(space.toString());
+        }
     }
 }
