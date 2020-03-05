@@ -43,9 +43,7 @@ public class Test {
         printFrame();
         Person firstPerson = new Person("Alex", "Lebowski");
         Person secondPerson = new Person("Keanu", "Reeves");
-        Person thirdPerson = new Person("Vasya", "Pupkin");
-        System.out.println("Вот несколько человек:\n" + firstPerson.toString() + "\n" + secondPerson.toString() +
-                "\n" + thirdPerson.toString());
+        System.out.println("Вот несколько человек:\n" + firstPerson.toString() + "\n" + secondPerson.toString());
     }
 
     private static void testVehicles() {
