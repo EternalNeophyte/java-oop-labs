@@ -3,7 +3,7 @@ package rpis81.alexandrov.oop.model;
 import rpis81.alexandrov.oop.model.exception.NoRentedSpaceException;
 import rpis81.alexandrov.oop.model.floor.Floor;
 import rpis81.alexandrov.oop.model.instance.InstanceHandler;
-import rpis81.alexandrov.oop.model.iterator.FloorIterator;
+import rpis81.alexandrov.oop.model.iterator.CustomizableIterator;
 import rpis81.alexandrov.oop.model.space.Space;
 import rpis81.alexandrov.oop.model.vehicle.Vehicle;
 import rpis81.alexandrov.oop.model.vehicle.VehicleTypes;
@@ -189,6 +189,6 @@ public class Parking implements InstanceHandler, Iterable<Floor> {
 
     @Override
     public Iterator<Floor> iterator() {
-        return new FloorIterator(getFloors());
+        return new CustomizableIterator<>(getFloors());
     }
 }

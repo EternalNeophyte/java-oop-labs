@@ -3,7 +3,7 @@ package rpis81.alexandrov.oop.model.floor;
 import rpis81.alexandrov.oop.model.exception.NoRentedSpaceException;
 import rpis81.alexandrov.oop.model.Person;
 import rpis81.alexandrov.oop.model.instance.InstanceHandler;
-import rpis81.alexandrov.oop.model.iterator.SpaceIterator;
+import rpis81.alexandrov.oop.model.iterator.CustomizableIterator;
 import rpis81.alexandrov.oop.model.space.RentedSpace;
 import rpis81.alexandrov.oop.model.space.Space;
 import rpis81.alexandrov.oop.model.vehicle.Vehicle;
@@ -152,7 +152,7 @@ public interface Floor extends InstanceHandler, Comparable<Floor>, Iterable<Spac
 
     @Override
     default Iterator<Space> iterator() {
-        return new SpaceIterator(toArray());
+        return new CustomizableIterator<>(toArray());
     }
 
     @Override
