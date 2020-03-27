@@ -1,15 +1,16 @@
 package rpis81.alexandrov.oop.model.iterator;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ObjectIterator {
+public class CustomizableIterator<T> implements Iterator<T> {
 
     private static final int INITIAL_VALUE = 0;
 
-    private Object[] objects;
+    private T[] objects;
     private int index;
 
-    ObjectIterator(Object[] objects) {
+    public CustomizableIterator(T[] objects) {
         this.objects = objects;
         this.index = INITIAL_VALUE;
     }
@@ -18,7 +19,7 @@ public class ObjectIterator {
         return index < objects.length;
     }
 
-    public Object next() {
+    public T next() {
         if(hasNext()) {
             return objects[index++];
         }
