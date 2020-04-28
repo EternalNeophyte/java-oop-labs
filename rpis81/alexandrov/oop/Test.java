@@ -27,6 +27,7 @@ public class Test {
         lab5tests();
         lab6tests();
         lab7tests();
+        //testFixedClones();
     }
 
     /*
@@ -380,5 +381,24 @@ public class Test {
         System.out.println("Текущий размер первого этажа: " + firstFloor.size());
         secondFloor.clear();
         System.out.println("Размер второго этажа после вызова метода clear: " + secondFloor.size());
+    }
+
+    private static void testFixedClones() {
+        Random random = new Random();
+        try {
+            Person person = (Person) new Person("Keanu", "Reeves").clone();
+            Vehicle vehicle = (Vehicle)
+                    new Vehicle("A897AO63", "BMW", "X5", VehicleTypes.CAR).clone();
+            OwnedSpace ownedSpace = (OwnedSpace) new OwnedSpace().clone();
+            RentedSpace rentedSpace = (RentedSpace) new RentedSpace(vehicle, person,
+                    getRandomSinceDate(random), getRandomEndsDate(random)).clone();
+            Node node = (Node) new Node(ownedSpace).clone();
+            RentedSpacesFloor rentedSpacesFloor = (RentedSpacesFloor) createRentedSpacesFloor().clone();
+            OwnersFloor ownersFloor = (OwnersFloor) createOwnersFloor().clone();
+            Parking parking = (Parking) new Parking(ownersFloor, rentedSpacesFloor).clone();
+            System.out.println("Объекты всех классов успешно склонированы");
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 }

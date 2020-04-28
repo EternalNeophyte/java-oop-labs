@@ -2,7 +2,7 @@ package rpis81.alexandrov.oop.model;
 
 import rpis81.alexandrov.oop.model.space.Space;
 
-public class Node {
+public class Node implements Cloneable {
 
     private Node previous;
     private Node next;
@@ -42,5 +42,10 @@ public class Node {
 
     public void setValue(Space value) {
         this.value = value;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

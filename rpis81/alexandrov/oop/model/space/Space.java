@@ -19,5 +19,5 @@ public interface Space {
     String toString();
     int hashCode();
     boolean equals(Object obj);
-    public Object clone() throws CloneNotSupportedException;
+    Object clone() throws CloneNotSupportedException;
 }

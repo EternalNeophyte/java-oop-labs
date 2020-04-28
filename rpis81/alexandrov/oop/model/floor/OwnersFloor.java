@@ -127,7 +127,38 @@ public class OwnersFloor implements Floor, InstanceHandler {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Object clone() {
+        try {
+            return super.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            return deployBuilder()
+                    .setSpaces(spaces)
+                    .setSize(size)
+                    .build();
+        }
+    }
+
+    public static Builder deployBuilder() {
+        return new OwnersFloor().new Builder();
+    }
+
+    public class Builder {
+
+        private Builder() { }
+
+        public Builder setSpaces(Space[] spaces) {
+            OwnersFloor.this.spaces = spaces;
+            return this;
+        }
+
+        public Builder setSize(int size) {
+            OwnersFloor.this.size = size;
+            return this;
+        }
+
+        public OwnersFloor build() {
+            return OwnersFloor.this;
+        }
     }
 }
