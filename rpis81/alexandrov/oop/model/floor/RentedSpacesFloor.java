@@ -5,6 +5,7 @@ import rpis81.alexandrov.oop.model.Node;
 import rpis81.alexandrov.oop.model.space.RentedSpace;
 import rpis81.alexandrov.oop.model.space.Space;
 
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -154,7 +155,38 @@ public class RentedSpacesFloor implements Floor, InstanceHandler {
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Object clone() {
+        try {
+            return super.clone();
+        }
+        catch (CloneNotSupportedException e) {
+           return deployBuilder()
+                    .setHead(head)
+                    .setSize(size)
+                    .build();
+        }
+    }
+
+    public static Builder deployBuilder() {
+        return new RentedSpacesFloor().new Builder();
+    }
+
+    public class Builder {
+
+        private Builder() {}
+
+        public Builder setHead(Node head) {
+            RentedSpacesFloor.this.head = head;
+            return this;
+        }
+
+        Builder setSize(int size) {
+            RentedSpacesFloor.this.size = size;
+            return this;
+        }
+
+        RentedSpacesFloor build() {
+            return RentedSpacesFloor.this;
+        }
     }
 }

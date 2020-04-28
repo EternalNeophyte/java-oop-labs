@@ -143,7 +143,7 @@ public interface Floor extends InstanceHandler, Comparable<Floor>, Iterable<Spac
     String toString();
     int hashCode();
     boolean equals(Object obj);
-    public Object clone() throws CloneNotSupportedException;
+    Object clone() throws CloneNotSupportedException;
 
     @Override
     default int compareTo(Floor floor) {

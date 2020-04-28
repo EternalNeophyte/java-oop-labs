@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-public class Parking implements InstanceHandler, Iterable<Floor> {
+public class Parking implements InstanceHandler, Iterable<Floor>, Cloneable {
 
     private final static int INITIAL_SIZE = 0;
 
@@ -190,5 +190,10 @@ public class Parking implements InstanceHandler, Iterable<Floor> {
     @Override
     public Iterator<Floor> iterator() {
         return new CustomizableIterator<>(getFloors());
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
