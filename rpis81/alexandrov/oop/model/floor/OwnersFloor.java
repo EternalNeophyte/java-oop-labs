@@ -94,9 +94,9 @@ public class OwnersFloor implements Floor, InstanceHandler {
     @Override
     public void expand() {
         if(spaces[spaces.length - 1] != null) {
-            Space[] updatedRentedSpaces = new Space[size * 2];
-            System.arraycopy(spaces, 0, updatedRentedSpaces, 0, spaces.length);
-            spaces = updatedRentedSpaces;
+            Space[] updatedSpaces = new Space[size * 2];
+            System.arraycopy(spaces, 0, updatedSpaces, 0, spaces.length);
+            spaces = updatedSpaces;
         }
     }
 
